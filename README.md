@@ -36,19 +36,16 @@ sudo docker run --name dancer -p 80:5000 -v /your_code_directory:/var/www -d ngi
 ### Pulling code from git
 One of the nice features of this container is its ability to pull code from a git repository with a couple of environmental variables passed at run time.  
 
-**Note:** You need to have your SSH key that you use with git to enable the deployment.  
-I recommend using a special deploy key per project to minimise the risk.
-
-To run the container and pull code simply specify the GIT_REPO URL including *git@* and then make sure you have a folder on the docker host with your id_rsa key stored in it:
+To run the container and pull code simply specify the GIT_REPO URL.
 
 ```
-sudo docker run -e 'GIT_REPO=git@git.ngd.io:flo/dancing-queen.git'  -v /opt/ngddeploy/:/root/.ssh -p 80:5000 -d ngineered/dancer
+sudo docker run -e 'GIT_REPO=https://github.com/kyzh/dancing-queen' -p 80:5000 -d ngineered/dancer
 ```
 
 To pull a repository and specify a branch add the GIT_BRANCH environment variable:
 
 ```
-sudo docker run -e 'GIT_REPO=git@git.ngd.io:flo/dancing-queen.git' -e 'GIT_BRANCH=dev' -v /opt/ngddeploy/:/root/.ssh -p 80:5000 -d ngineered/dancer
+sudo docker run -e 'GIT_REPO=https://github.com/kyzh/dancing-queen' -e 'GIT_BRANCH=dev' -p 80:5000 -d ngineered/dancer
 ```
 
 ## Special Features
@@ -63,3 +60,14 @@ In order to refresh the code in a container and pull newer code form git simply 
 ```
 sudo docker exec -t -i <CONTAINER_NAME> /usr/bin/pull
 ```
+
+## Todo:
+### Short term
+- [] Ensure the ```--port``` is configurable at runtime (as in within the container)
+- [] Ensure the ```--host``` is configurable at runtime (not too sure why that would be usefull)/ ensure that making so it not needed
+- [] Ensure that the environment variable that plack support are all documented with example.
+- [] Ensure that configuration file and environment file are also made into an option via env variable
+
+### Longer term
+- [] Make middleware/webserver available eg. Starman (create a new image each?)
+- [] Look into carton exec and using git in the building part (create another image?)
