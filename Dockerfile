@@ -1,7 +1,7 @@
 FROM perl:latest
 MAINTAINER Florentin Raud flo@ngineered.co.uk
 
-apt-get update && \
+RUN apt-get update && \
 apt-get upgrade -y && \
 BUILD_PACKAGES="curl make gcc" && \
 apt-get -y install $BUILD_PACKAGES --no-install-recommends && \
