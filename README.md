@@ -22,7 +22,7 @@ docker pull ngineered/dancer:latest
 To simply run the container:
 
 ```
-sudo docker run --name dancer -p 5000:80 -d ngineered/dancer
+sudo docker run --name dancer -p 80:5000 -d ngineered/dancer
 ```
 You can then browse to http://\<docker_host\>:80 or http://localhost:80 or http://127.0.0.1:80 to view the site.  
 
@@ -30,7 +30,7 @@ You can then browse to http://\<docker_host\>:80 or http://localhost:80 or http:
 If you want to link to your app directory on the docker host to the container run:
 
 ```
-sudo docker run --name dancer -p 5000:80 -v /your_code_directory:/var/www -d ngineered/dancer
+sudo docker run --name dancer -p 80:5000 -v /your_code_directory:/var/www -d ngineered/dancer
 ```
 
 ### Pulling code from git
@@ -42,13 +42,13 @@ I recommend using a special deploy key per project to minimise the risk.
 To run the container and pull code simply specify the GIT_REPO URL including *git@* and then make sure you have a folder on the docker host with your id_rsa key stored in it:
 
 ```
-sudo docker run -e 'GIT_REPO=git@git.ngd.io:flo/dancing-queen.git'  -v /opt/ngddeploy/:/root/.ssh -p 5000:80 -d ngineered/dancer
+sudo docker run -e 'GIT_REPO=git@git.ngd.io:flo/dancing-queen.git'  -v /opt/ngddeploy/:/root/.ssh -p 80:5000 -d ngineered/dancer
 ```
 
 To pull a repository and specify a branch add the GIT_BRANCH environment variable:
 
 ```
-sudo docker run -e 'GIT_REPO=git@git.ngd.io:flo/dancing-queen.git' -e 'GIT_BRANCH=dev' -v /opt/ngddeploy/:/root/.ssh -p 5000:80 -d ngineered/dancer
+sudo docker run -e 'GIT_REPO=git@git.ngd.io:flo/dancing-queen.git' -e 'GIT_BRANCH=dev' -v /opt/ngddeploy/:/root/.ssh -p 80:5000 -d ngineered/dancer
 ```
 
 ## Special Features
