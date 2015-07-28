@@ -26,4 +26,4 @@ fi
 
 # Start the dancer process
 pushd /var/www/
-plackup -r bin/app.psgi
+plackup -r bin/app.psgi --port 5000 --host 0.0.0.0
